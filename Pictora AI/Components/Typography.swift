@@ -39,7 +39,7 @@ struct Typography: View {
         case .display1:
             return (.regular, 32)
         case .logo:
-            return (.regular, 26)
+            return (.regular, 25)
         case .display2:
             return (.regularAlt, 24)
         case .body1:

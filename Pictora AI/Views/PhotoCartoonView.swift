@@ -101,34 +101,12 @@ struct PhotoToCartoonView: View {
     private var createContent: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
-                // Image Picker Section
-                VStack(spacing: 16) {
-                    if let selectedImage {
-                        Image(uiImage: selectedImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 300)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                    } else {
-                        PhotosPicker(selection: $selectedItem) {
-                            VStack(spacing: 12) {
-                                Image(systemName: "photo.on.rectangle.angled")
-                                    .font(.system(size: 32))
-                                    .foregroundColor(.white)
-                                
-                                Typography(
-                                    label: "Select a photo",
-                                    variants: .body1,
-                                    color: .white
-                                )
-                            }
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 200)
-                            .background(Color.white.opacity(0.05))
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                        }
-                    }
-                }
+                EnhancedPhotoUpload(
+                    selectedItem: $selectedItem,
+                    selectedImage: $selectedImage
+                )
+                
+                // Add the onChange handler here if you want
                 .onChange(of: selectedItem) { _ in
                     Task {
                         if let data = try? await selectedItem?.loadTransferable(type: Data.self) {

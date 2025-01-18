@@ -4,6 +4,9 @@ import SwiftUI
 struct AIStoreView: View {
     @State private var isNavigatingToSignatureView: Bool = false
     @State private var isNavigatingTophotoToCartoonView: Bool = false
+    @State private var isNavigatingToPhotoToAnimeView: Bool = false
+    @State private var isNavigatingToPhotoToStickerView: Bool = false
+    @State private var isNavigatingToPhotoRemoverView: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -23,7 +26,7 @@ struct AIStoreView: View {
                         Spacer()
                         CustomButton(label: "Learn more", height: 45, background: .solid(.white), textColor: .black, icon: "arrow.right", position: .trailing)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 20, height: 300)
+                    .frame(width: UIScreen.main.bounds.width - 20, height: 200)
                     .padding(.vertical, 30)
                     .background(
                         ZStack {
@@ -50,7 +53,9 @@ struct AIStoreView: View {
                             title: "Remove background",
                             description: "Remove backgrounds from your images just with a click",
                             accentColor: .blue,
-                            onTap: {}
+                            onTap: {
+                                isNavigatingToPhotoRemoverView = true
+                            }
                         )
                         
                         AIToolCard(
@@ -78,7 +83,9 @@ struct AIStoreView: View {
                             title: "AI Photo To Anime",
                             description: "Turn your pictures into anime",
                             accentColor: .blue,
-                            onTap: {}
+                            onTap: {
+                                isNavigatingToPhotoToAnimeView = true
+                            }
                         )
                         
                         AIToolCard(
@@ -86,7 +93,9 @@ struct AIStoreView: View {
                             title: "AI Face To Sticker",
                             description: "Create your unique striking sticker with ease.",
                             accentColor: .blue,
-                            onTap: {}
+                            onTap: {
+                                isNavigatingToPhotoToStickerView = true
+                            }
                         )
                         
                         
@@ -103,6 +112,15 @@ struct AIStoreView: View {
         }
         .navigationDestination(isPresented: $isNavigatingTophotoToCartoonView){
             PhotoToCartoonView().navigationBarBackButtonHidden()
+        }
+        .navigationDestination(isPresented: $isNavigatingToPhotoToAnimeView){
+            PhotoToAnimeView().navigationBarBackButtonHidden()
+        }
+        .navigationDestination(isPresented: $isNavigatingToPhotoToStickerView){
+            FaceToStickerView().navigationBarBackButtonHidden()
+        }
+        .navigationDestination(isPresented: $isNavigatingToPhotoRemoverView){
+            RemoveBackgroundView().navigationBarBackButtonHidden()
         }
     }
 }
