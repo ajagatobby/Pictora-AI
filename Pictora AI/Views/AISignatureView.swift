@@ -83,6 +83,13 @@ struct AISignatureView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Image("logo")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     CustomBackButton()
                 }
@@ -119,7 +126,7 @@ struct AISignatureView: View {
                 }
                 .padding(.horizontal)
             }
-            .padding(.top)
+            .padding(.top, 40)
         }
     }
     

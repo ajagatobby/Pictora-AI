@@ -92,14 +92,16 @@ struct HomeView: View {
                                     submittedRequest = true
                                 }
                             )
+                            .padding(.vertical, 16)
                             Spacer()
                         }
-                        .padding(.vertical, 16)
+                        
                         .padding(.horizontal)
                     }
-                    .padding(.bottom, keyboardHeight > 0 ? keyboardHeight - 30 : 70) // Added extra padding for tab bar
+//                    for tab bar
                     .background(.clear)
                 }
+                .padding(.bottom, keyboardHeight > 0 ? keyboardHeight - 30 : 70) // Added extra padding
             }
         }
         .fullScreenCover(isPresented: $submittedRequest) {

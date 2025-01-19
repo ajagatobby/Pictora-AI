@@ -119,22 +119,64 @@ struct PhotoToCartoonView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.top, 40)
+            .padding(.horizontal)
+            .padding(.bottom)
         }
     }
     
     private var myCartoonsContent: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
-                Typography(
-                    label: "Your cartoons will appear here",
-                    variants: .body1,
-                    color: .white.opacity(0.6)
-                )
+            if myArts.isEmpty {
+                VStack(spacing: 16) {
+                    Image(systemName: "photo.stack.fill")
+                        .font(.system(size: 48))
+                        .foregroundColor(.white.opacity(0.3))
+                        .padding(.bottom, 8)
+                    
+                    VStack(spacing: 8) {
+                        Typography(
+                            label: "No Creations Yet",
+                            variants: .body2,
+                            color: .white.opacity(0.9)
+                        )
+                        
+                        Typography(
+                            label: "Your AI-generated art will appear here",
+                            variants: .body1,
+                            color: .white.opacity(0.6)
+                        )
+                    }
+                    
+                    Button(action: {}) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 16, weight: .medium))
+                            Text("Create New")
+                                .font(.system(size: 16, weight: .medium))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
+                        .background(
+                            Capsule()
+                                .fill(Color.blue)
+                        )
+                    }
+                    .padding(.top, 16)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal)
+                .padding(.vertical, 40)
+            } else {
+                LazyVStack(spacing: 0) {
+                    ArtCollectionGrid(arts: myArts)
+                        .padding(.vertical, 50)
+                }
+                .padding(.horizontal)
             }
-            .frame(maxWidth: .infinity)
-            .padding()
         }
+        .background(.ultraThinMaterial)
     }
 }
 

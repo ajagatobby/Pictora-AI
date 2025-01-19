@@ -18,7 +18,7 @@ struct CachedNetworkImage<Placeholder: View>: View {
             if let image = viewModel.image {
                 Image(uiImage: image)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .opacity(imageOpacity)
                     .onAppear {
                         withAnimation(.easeIn(duration: 0.3)) {

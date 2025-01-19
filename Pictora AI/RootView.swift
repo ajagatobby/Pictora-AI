@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RootView: View {
     @State private var selectedTab: TabItem = .home
+    @State private var showingProfile = false
     
     var body: some View {
         NavigationStack {
@@ -16,9 +17,6 @@ struct RootView: View {
                     
                     MyArtsView()
                         .tag(TabItem.arts)
-                    
-                    DiscoverView()
-                        .tag(TabItem.discover)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 
@@ -27,41 +25,31 @@ struct RootView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading){
+                    Image("logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 35, height: 35)
+                }
                 ToolbarItem(placement: .principal) {
                     Typography(label: "Pictora AI", variants: .logo, color: .white)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Image("man")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 40, height: 40)
-                        .clipShape(Circle())
+                    Button(action: { showingProfile = true }) {
+                        Image("man")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40, height: 40)
+                            .clipShape(Circle())
+                    }
                 }
             }
             .ignoresSafeArea(.all)
         }
         .preferredColorScheme(.dark)
-    }
-}
-
-
-struct MyArtsView: View {
-    var body: some View {
-        ZStack {
-            GradientBackground()
-            Text("My Arts")
-                .foregroundColor(.white)
-        }
-    }
-}
-
-struct DiscoverView: View {
-    var body: some View {
-        ZStack {
-            GradientBackground()
-            Text("Discover")
-                .foregroundColor(.white)
+        .sheet(isPresented: $showingProfile) {
+            ProfileView()
         }
     }
 }

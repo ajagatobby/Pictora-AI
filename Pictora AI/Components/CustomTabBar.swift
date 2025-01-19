@@ -4,7 +4,7 @@ enum TabItem: String, CaseIterable {
     case home = "Home"
     case store = "AI Store"
     case arts = "My Arts"
-    case discover = "Discover"
+//    case discover = "Discover"
     
     var icon: String {
         switch self {
@@ -14,8 +14,9 @@ enum TabItem: String, CaseIterable {
             return "sparkles.rectangle.stack"
         case .arts:
             return "photo.stack.fill"
-        case .discover:
-            return "safari.fill"
+            //        case .discover:
+            //            return "safari.fill"
+            //        }
         }
     }
 }
@@ -77,9 +78,9 @@ struct TabButton: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Image(systemName: tab.icon)
-                    .font(.system(size: 20))
+                    .font(.system(size: 25))
                 Text(tab.rawValue)
-                    .font(.fkDisplay(.regular, size: 12))
+                    .font(.fkDisplay(.regular, size: 15))
             }
             .foregroundStyle(
                 isSelected ?
